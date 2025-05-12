@@ -1,4 +1,4 @@
----
+
 
 # Finals Lab Task 2: Transforming ER Model to Relational Tables
 This portfolio demonstrates the transformation of an ER model into relational tables using MySQL. The focus is on defining entities, identifying keys, establishing relationships, and enforcing referential integrity constraints in line with the ER diagram representing student assignment submissions.
