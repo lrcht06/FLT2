@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finals Lab Task 2</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="stars"></div>
+  <div id="twinkling"></div>
+
+  <audio id="bg-music" autoplay loop>
+    <source src="assets/ITbgmusic.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="container">
+    <h1 class="clickable">Finals Lab Task 2: Transforming ER Model to Relational Tables</h1>
+    <p>This portfolio demonstrates the transformation of an ER model into relational tables using MySQL. The focus is on defining entities, identifying keys, establishing relationships, and enforcing referential integrity constraints in line with the ER diagram representing student assignment submissions.</p>
+
+    <hr />
+
+    <h2 class="clickable">STEP BY STEP PROCESS</h2>
+    <h3>STEP 1</h3>
+    <p>Launch MySQL Workbench or phpMyAdmin and start XAMPP to activate MySQL.</p>
+
+    <h3>STEP 2</h3>
+    <p>Create a new database to store all the related tables.</p>
+
+    <h3>STEP 3</h3>
+    <p>For each of the following tasks, write and execute the appropriate SQL query:</p>
+   <ul>
+      <li><strong>Task 1 – Create the <code>student</code> table</strong>
+        <ul>
+          <li>Add a column named <code>username</code> using VARCHAR(50).</li>
+          <li>Set <code>username</code> as the primary key to uniquely identify each student.</li>
+        </ul>
+      </li>
+      <li><strong>Task 2 – Create the <code>assignment</code> table</strong>
+        <ul>
+          <li>Define a column <code>shortname</code> as VARCHAR(50) and set it as the primary key.</li>
+          <li>Add a <code>due_date</code> column as DATE, and ensure it is not null.</li>
+          <li>Include a <code>url</code> column using VARCHAR(255) for storing resource or submission links.</li>
+        </ul>
+      </li>
+      <li><strong>Task 3 – Create the <code>submission</code> table</strong>
+        <ul>
+          <li>Add <code>username</code> as a foreign key referencing the <code>student</code> table.</li>
+          <li>Add <code>shortname</code> as a foreign key referencing the <code>assignment</code> table.</li>
+          <li>Include <code>version</code> as an INT for tracking multiple submissions.</li>
+          <li>Add <code>submit_date</code> as a DATE, which is required (not null).</li>
+          <li>Include a <code>data</code> column as TEXT to hold submission content.</li>
+          <li>Use a composite primary key of <code>username</code>, <code>shortname</code>, and <code>version</code>.</li>
+        </ul>
+      </li>
+      <li><strong>Task 4 – Define relationships and apply referential integrity</strong>
+        <ul>
+          <li>Apply FOREIGN KEY constraints on <code>username</code> and <code>shortname</code> in the <code>submission</code> table.</li>
+          <li>Use ON DELETE CASCADE to ensure submissions are deleted if a student or assignment is removed.</li>
+          <li>Verify referential integrity is properly enforced across all relationships.</li>
+        </ul>
+      </li>
+    </ul>
+    
+    <hr />
+
+    <h2 class="clickable">Entity Relationship</h2>
+    <h3>Student → Submission</h3>
+    <p>One-to-Many (One Student can <code>submit</code> many Submissions)</p>
+    <h3>Assignment → Submission</h3>
+    <p>One-to-Many (One Assignment can <code>complete</code> many Submissions)</p>
+    <h3>Each Submission is made by one Student for one Assignment</h3>
+    <h3>Multiple submissions for the same assignment from same student can be tracked by <code>version</code></h3>
+
+
+    <h2 class="clickable">Query Statements (Screenshots)</h2>
+    <div class="image-column">
+      <h3>Task 1</h3>
+      <img src="images/FLT2(T1).png" alt="Task 1" />
+      <h3>Task 2</h3>
+      <img src="images/FLT2(T2).png" alt="Task 2" />
+      <h3>Task 3</h3>
+      <img src="images/FLT2(T3).png" alt="Task 3" />
+    </div>
+
+    <hr />
+
+    <h2 class="clickable">Table Structures (Screenshots)</h2>
+    <div class="image-column">
+      <h3>Table 1</h3>
+      <img src="images/FLT2(tbl1).png" alt="Table 1" />
+      <h3>Table 2</h3>
+      <img src="images/FLT2(tbl2).png" alt="Table 2" />
+      <h3>Table 3</h3>
+      <img src="images/FLT2(tbl3).png" alt="Table 3" />
+    </div>
+
+    <hr />
+    
+ <h2 class="clickable">EER Diagram (Screenshot)</h2>
+      <img src="images/FLT2(EER_Diagram).png">
+    
+    <h2 class="clickable">SQL Copy (File)</h2>
+    <p>
+      <a class="file-link" href="files/L.E.%20Turla%20(FLT2_Code).sql" download>
+        📂 L.E.Turla (Finals Lab Task 2 Code)
+      </a>
+    </p>
+
+  <script>
+    document.addEventListener("mousemove", (e) => {
+      const trail = document.createElement("div");
+      trail.className = "cursor-trail";
+      trail.style.left = `${e.pageX}px`;
+      trail.style.top = `${e.pageY}px`;
+      document.body.appendChild(trail);
+      setTimeout(() => trail.remove(), 1000);
+    });
+
+    document.querySelectorAll(".clickable").forEach(el => {
+      el.addEventListener("click", () => {
+        el.classList.add("clicked");
+        setTimeout(() => el.classList.remove("clicked"), 300);
+      });
+    });
+  </script>
+</body>
+</html>
